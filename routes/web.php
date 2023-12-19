@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Swagger\SwaggerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/api/docs', [SwaggerController::class, 'index']);
