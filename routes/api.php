@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RequestController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,3 +20,7 @@ Route::controller(UserController::class)->group(function () {
     Route::post('signup', 'postSignUp');
     Route::post('logout', 'logout')->middleware('auth:api');
 });
+
+Route::post('/requests', [RequestController::class, 'create'])->middleware('auth:api');
+Route::get('/requests', [RequestController::class, 'getAll'])->middleware('auth:api');
+Route::put('/requests/{id}', [RequestController::class, 'resolve'])->middleware('auth:api');

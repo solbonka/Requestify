@@ -31,17 +31,4 @@ class SignUpRequest extends FormRequest
             'password' => 'required|min:8'
         ];
     }
-
-    /**
-     * @param Validator $validator
-     * @return void
-     */
-    public function failedValidation(Validator $validator): void
-    {
-        throw new HttpResponseException(response()->json([
-            'success'   => false,
-            'message'   => 'Validation errors',
-            'data'      => $validator->errors()
-        ], 400));
-    }
 }

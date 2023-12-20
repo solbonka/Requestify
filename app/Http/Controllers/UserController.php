@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SignInRequest;
 use App\Http\Requests\SignUpRequest;
+use App\Jobs\SendVerificationEmailJob;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
-
+        SendVerificationEmailJob::dispatch($user)->onQueue('default');
         Auth::login($user);
         $result['token'] = $user->createToken('MyApp')->accessToken;
         $result['name'] = $user->name;
@@ -56,8 +57,8 @@ class UserController extends Controller
 
     public function logout(): JsonResponse
     {
-        $user = Auth::user()->token();
-        $user->revoke();
+        $token = Auth::user()->token();
+        $token->revoke();
 
         return response()->json([
             'message' => 'Successfully logged out',

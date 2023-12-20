@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('status', ['Active', 'Resolved']);
             $table->text('message');
             $table->text('comment')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

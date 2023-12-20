@@ -2,16 +2,12 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
-class SignInRequest extends FormRequest
+class GetRequestsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
     public function authorize(): bool
     {
@@ -21,13 +17,14 @@ class SignInRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, mixed>
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            'email' => 'required|string|email',
-            'password' => 'required|min:8'
+            'status' => 'nullable|string|in:Active,Resolved',
+            'start_date' => 'nullable|date_format:Y-m-d',
+            'end_date' => 'nullable|date_format:Y-m-d',
         ];
     }
 }
