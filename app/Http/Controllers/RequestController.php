@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class RequestController extends Controller
 {
@@ -20,6 +21,7 @@ class RequestController extends Controller
     {
         $this->requestService = $requestService;
     }
+
     public function create(CreateRequestRequest $request)
     {
         $user = Auth::user();
@@ -34,7 +36,7 @@ class RequestController extends Controller
 
         return response()->json([
             'data' => $requestModel->toArray(),
-            'message' => 'Заявка успешно создана'
+            'message' => 'Заявка успешно создана',
         ], 201);
     }
 
@@ -50,18 +52,18 @@ class RequestController extends Controller
             if ($result->count()) {
                 return response()->json([
                     'data' => $result,
-                    'message' => 'Requests retrieved successfully.'
+                    'message' => 'Requests retrieved successfully.',
                 ]);
             } else {
                 throw new ModelNotFoundException();
             }
         } catch (ModelNotFoundException $exception) {
             return response()->json([
-                'message' => 'No requests found.'
+                'message' => 'No requests found.',
             ], 404);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return response()->json([
-                'message' => 'An error occurred while retrieving requests.'
+                'message' => 'An error occurred while retrieving requests.',
             ], 500);
         }
     }
@@ -75,6 +77,7 @@ class RequestController extends Controller
         $requestModel = Request::findOrFail($id);
         $comment = $request->comment;
         $result = $this->requestService->resolve($requestModel, $adminId, $comment);
+
         return response()->json($result);
     }
 

@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Queue Connection Name
@@ -29,7 +28,6 @@ return [
     */
 
     'connections' => [
-
         'sync' => [
             'driver' => 'sync',
         ],
@@ -71,7 +69,6 @@ return [
             'after_commit' => false,
         ],
         'rabbitmq' => [
-
             'driver' => 'rabbitmq',
             'queue' => env('RABBITMQ_QUEUE', 'default'),
             'connection' => PhpAmqpLib\Connection\AMQPLazyConnection::class,
@@ -88,7 +85,6 @@ return [
         ],
 
         'rabbitmq2' => [
-
             'driver' => 'rabbitmq',
             'queue' => env('RABBITMQ_QUEUE', 'resolved'),
             'connection' => PhpAmqpLib\Connection\AMQPLazyConnection::class,
@@ -137,5 +133,4 @@ return [
         'database' => env('DB_CONNECTION', 'mysql'),
         'table' => 'failed_jobs',
     ],
-
 ];

@@ -23,7 +23,8 @@ class UserController extends Controller
         $result['token'] = $user->createToken('MyApp')->accessToken;
         $result['name'] = $user->name;
 
-        return response()->json([
+        return response()->json(
+            [
                 'success' => true,
                 'data' => $result,
                 'message' => 'User register successfully.',
@@ -33,24 +34,26 @@ class UserController extends Controller
 
     public function postSignIn(SignInRequest $request): JsonResponse
     {
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
-            $result['token'] = $user->createToken('MyApp')-> accessToken;
+            $result['token'] = $user->createToken('MyApp')->accessToken;
             $result['name'] = $user->name;
 
-            return response()->json([
-                'success' => true,
-                'data' => $result,
-                'message' => 'User login successfully.',
+            return response()->json(
+                [
+                    'success' => true,
+                    'data' => $result,
+                    'message' => 'User login successfully.',
                 ]
             );
-        }
-        else{
-            return response()->json([
-                'success' => false,
-                'error' => 'Wrong email or password',
-                'message' => 'Unauthorised.',
-                ], 401
+        } else {
+            return response()->json(
+                [
+                    'success' => false,
+                    'error' => 'Wrong email or password',
+                    'message' => 'Unauthorised.',
+                ],
+                401
             );
         }
     }

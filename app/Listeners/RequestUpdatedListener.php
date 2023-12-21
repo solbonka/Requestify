@@ -4,8 +4,6 @@ namespace App\Listeners;
 
 use App\Events\RequestUpdatedEvent;
 use App\Jobs\SendResolvedMessageJob;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class RequestUpdatedListener
 {
@@ -14,7 +12,6 @@ class RequestUpdatedListener
      */
     public function __construct()
     {
-        //
     }
 
     /**

@@ -3,15 +3,11 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
 class SignUpRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
     public function authorize(): bool
     {
@@ -28,7 +24,7 @@ class SignUpRequest extends FormRequest
         return [
             'name' => 'required|string|alpha|min:2',
             'email' => 'required|string|email|unique:users',
-            'password' => 'required|min:8'
+            'password' => 'required|min:8',
         ];
     }
 }

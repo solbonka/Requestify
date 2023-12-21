@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Request extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
         'email',
@@ -16,11 +17,11 @@ class Request extends Model
         'user_id',
         'message',
         'comment',
-        'admin_id'
+        'admin_id',
     ];
 
     protected $dispatchesEvents = [
-        'updated' => RequestUpdatedEvent::class
+        'updated' => RequestUpdatedEvent::class,
     ];
 
     public function user()

@@ -13,17 +13,14 @@ class IsAdmin
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user() &&  Auth::user()->is_admin) {
+        if (Auth::user() && Auth::user()->is_admin) {
             return $next($request);
         }
 
-        throw new HttpResponseException(response()->json([
-            'success'   => false,
-            'message'   => 'All requests are accessible only to the admin.',
-        ], 400));
+        throw new HttpResponseException(response()->json(['success' => false, 'message' => 'All requests are accessible only to the admin.'], 400));
     }
 }

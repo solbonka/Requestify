@@ -2,10 +2,10 @@
 
 namespace Tests\Unit;
 
-use App\Models\Request;
-use Tests\TestCase;
 use App\Http\Resources\RequestResource;
+use App\Models\Request;
 use Illuminate\Http\Request as HttpRequest;
+use Tests\TestCase;
 
 class RequestResourceTest extends TestCase
 {

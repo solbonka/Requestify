@@ -25,6 +25,5 @@ class UserSeeder extends Seeder
             ->create([
                 'password' => Hash::make('password'),
             ]);
-
     }
 }

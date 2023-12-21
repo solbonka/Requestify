@@ -4,7 +4,6 @@ namespace App\Mail;
 
 use App\Models\Request;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -12,14 +11,13 @@ use Illuminate\Queue\SerializesModels;
 
 class RequestResponse extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     public Request $request;
 
     /**
      * Create a new message instance.
-     *
-     * @param  Request  $request
      */
     public function __construct(Request $request)
     {

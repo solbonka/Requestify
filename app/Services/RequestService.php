@@ -14,11 +14,13 @@ class RequestService
                 'comment' => $comment,
                 'admin_id' => $adminId,
             ]);
+
             return [
                 'data' => $request->toArray(),
                 'message' => 'Request resolved successfully',
             ];
         }
+
         return [
             'data' => $request->toArray(),
             'message' => 'The request has already been resolved',
