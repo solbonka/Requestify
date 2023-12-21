@@ -15,11 +15,14 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('email');
-            $table->enum('status', ['Active', 'Resolved']);
+            $table->enum('status', ['Active', 'Resolved'])->index();
             $table->text('message');
             $table->text('comment')->nullable();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('admin_id')->nullable();
             $table->timestamps();
+
+            $table->index('created_at');
 
             $table->foreign('user_id')->references('id')->on('users');
         });

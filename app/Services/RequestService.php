@@ -6,15 +6,22 @@ use App\Models\Request;
 
 class RequestService
 {
-    public function resolve(Request $request, string $comment): string
+    public function resolve(Request $request, int $adminId, string $comment): array
     {
         if ($request->status === 'Active') {
             $request->update([
                 'status' => 'Resolved',
                 'comment' => $comment,
+                'admin_id' => $adminId,
             ]);
-            return 'Request resolved successfully';
+            return [
+                'data' => $request->toArray(),
+                'message' => 'Request resolved successfully',
+            ];
         }
-        return 'The request has already been resolved';
+        return [
+            'data' => $request->toArray(),
+            'message' => 'The request has already been resolved',
+        ];
     }
 }

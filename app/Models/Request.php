@@ -16,6 +16,7 @@ class Request extends Model
         'user_id',
         'message',
         'comment',
+        'admin_id'
     ];
 
     protected $dispatchesEvents = [

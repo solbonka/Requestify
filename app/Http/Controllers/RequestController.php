@@ -66,18 +66,29 @@ class RequestController extends Controller
         }
     }
 
-    public function resolve(HttpRequest $request, $id)
+    public function resolve(HttpRequest $request, $id): JsonResponse
     {
+        $adminId = Auth::user()->id;
         $request->validate([
             'comment' => 'required|string',
         ]);
         $requestModel = Request::findOrFail($id);
         $comment = $request->comment;
-        $message = $this->requestService->resolve($requestModel, $comment);
+        $result = $this->requestService->resolve($requestModel, $adminId, $comment);
+        return response()->json($result);
+    }
+
+    public function delete(HttpRequest $request): JsonResponse
+    {
+        $request->validate([
+            'id' => 'required|int',
+        ]);
+
+        $result = Request::where('user_id', auth()->id())->find($request->id);
+        $result->delete();
 
         return response()->json([
-            'data' => $requestModel->toArray(),
-            'message' => $message,
-        ]);
+            'message' => 'Request deleted successfully.',
+        ], 204);
     }
 }
