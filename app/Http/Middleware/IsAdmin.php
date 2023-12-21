@@ -21,6 +21,9 @@ class IsAdmin
             return $next($request);
         }
 
-        throw new HttpResponseException(response()->json(['success' => false, 'message' => 'All requests are accessible only to the admin.'], 400));
+        throw new HttpResponseException(response()->json([
+            'success' => false,
+            'message' => 'All requests are accessible only to the admin.'
+        ], 400));
     }
 }

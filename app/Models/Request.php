@@ -41,7 +41,9 @@ class Request extends Model
     public function scopeFilterByDate($query, $startDate, $endDate)
     {
         if ($startDate && $endDate) {
-            return $query->whereBetween('created_at', [$startDate, $endDate]);
+            $startDateTime = $startDate . " 00:00:00";
+            $endDateTime = $endDate . " 23:59:59";
+            return $query->whereBetween('created_at', [$startDateTime, $endDateTime]);
         }
 
         return $query;

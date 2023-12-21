@@ -22,8 +22,9 @@ Route::controller(UserController::class)->group(function () {
 });
 
 Route::controller(RequestController::class)->group(function () {
-    Route::get('requests', 'getAll')->middleware('isAdmin');
+    Route::get('requests', 'getActive')->middleware('auth:api', 'isAdmin');
     Route::post('requests', 'create')->middleware('auth:api');
-    Route::delete('requests', 'delete')->middleware('isAdmin');
-    Route::put('requests/{id}', 'resolve')->middleware('isAdmin');
+    Route::post('requests/filtered', 'getByStatusAndDate')->middleware('auth:api', 'isAdmin');
+    Route::delete('requests', 'delete')->middleware('auth:api', 'isAdmin');
+    Route::put('requests/{id}', 'resolve')->middleware('auth:api', 'isAdmin');
 });
